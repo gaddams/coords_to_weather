@@ -4,8 +4,15 @@ require 'json'
 class CoordsController < ApplicationController
 
 def fetch_weather
-    @address_1 = params[:address]
-    #@address_1 = "milpitas,ca"
+
+
+    if params[:address]
+        @address_1 = params[:address]
+    else
+        @address_1 = "croner of Foster and Sheridan"
+    end
+
+
     @url_safe_address = URI.encode(@address_1)
     #@url_safe_address = params[:address]
 
