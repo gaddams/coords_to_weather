@@ -1,5 +1,11 @@
 <h1>Weather Lookup</h1>
 
+<form>
+<label for="loc">Address</label>
+<input name="address" type="text" id="loc" required>
+</form>
+
+
 <dl>
   <dt>Latitude:</dt>
   <dd><%= @latitude %></dd>
@@ -18,4 +24,9 @@
 
   <dt>Summary for the week:</dt>
   <dd><%= @daily_summary %></dd>
+
+  <dt>Address is</dt>
+  <dd><%= params[:address] %></dd>
+
+
 </dl>

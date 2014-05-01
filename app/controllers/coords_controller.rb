@@ -2,9 +2,25 @@ require 'open-uri'
 require 'json'
 
 class CoordsController < ApplicationController
-  def fetch_weather
-    @latitude = 82.0538387
-    @longitude = -77.67721
+
+def fetch_weather
+    @address_1 = Address.new(params[:address])
+    #@address_1 = "milpitas,ca"
+    @url_safe_address = URI.encode(@address_1)
+    #@url_safe_address = params[:address]
+
+    url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{@url_safe_address}&sensor=true"
+    raw_data = open(url).read
+    parsed_data = JSON.parse(raw_data)
+    results = parsed_data["results"]
+    first = results[0]
+    geometry = first["geometry"]
+    location = geometry["location"]
+    @latitude = location["lat"]
+    @longitude = location["lng"]
+
+    # @latitude = 82.0538387
+    # @longitude = -77.67721
     your_api_key = "c9e9c0126467bcf2c8c7020fbb669030"
 
     # Your code goes here.
